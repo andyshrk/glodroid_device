@@ -125,10 +125,11 @@ FUNC_BEGIN(bootcmd_start)
  adtimg get dt --id=\$overlay_fdt_id dtb_start dtb_size overlay_fdt_index &&
  cp.b \$dtb_start \$dtboaddr \$dtb_size &&
  fdt resize 8192 &&
-#ifdef device_pinephonepro
+#if defined(device_pinephonepro) || defined(device_leez_p710)
  fdt rsvmem add 0x8000000 0x8000000 &&
  fdt rsvmem print &&
 #endif
+
  fdt apply \$dtboaddr &&
  FEXTENV(bootargs, " androidboot.dtbo_idx=\${main_fdt_index},\${overlay_fdt_index}") ;
  /* START KERNEL */
